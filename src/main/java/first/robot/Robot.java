@@ -29,7 +29,7 @@ public class Robot extends OpModeRobot {
 
     @Override
     public void robotPeriodic() {
-        // this could also be used to update utilities such as a poseEstimator
+        // this could also be used to update utilities such as a PoseEstimator
 
         // make commands do the command things
         scheduler.run();

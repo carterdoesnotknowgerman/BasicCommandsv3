@@ -21,14 +21,10 @@ public class OscillateAuto implements OpMode {
     }
 
     public Command oscillate() {
-        // during the coroutine.wait, the default command for doohickey
-        // (doohickey.stop) takes over to set the motor speed to 0.0
         return Command.noRequirements(coroutine -> {
             while (true) {
                 coroutine.await(robot.doohickey.go(1.0).withTimeout(Seconds.of(1)));
-                coroutine.wait(Seconds.of(1));
                 coroutine.await(robot.doohickey.go(-1.0).withTimeout(Seconds.of(1)));
-                coroutine.wait(Seconds.of(1));
             }
         })
                 .named("Doohickey.Oscillate");
