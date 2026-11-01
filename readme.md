@@ -9,7 +9,6 @@ it has one other command, the `go(double position)` command. this sets the motor
 
 the robot also has four `OpMode`s, one teleop, two auto, and one utility.
 the teleop `OpMode`, `BasicTeleop` allows for the `Doohickey`'s motor to be set to the positions 1.0, -1.0, 0.5, and -0.5 with the 0th, 1st, 2nd, and 3rd buttons respectively on the 0th controller.
-note that due to this project being on wpilib 2027 alpha 7, commands can still run despite the robot being disabled, but the motor will not move. however, when enabling the robot, the runnning command will go into action immediately which may cause unwanted movement if a button was pressed while disabled. this should be (is?) fixed in alpha 8.
 the first auto `OpMode`, `DoNothingAuto` does exactly as the name suggests, nothing.
 the second auto `OpMode`, `OscillateAuto` causes the `Doohickey`'s motor to be set to position 1.0 for one second, set it to position -1.0 for one second, and then do that all over again forever while the robot is enabled.
 the utility `OpMode` is basically just the `OscillateAuto` but with only one run of the loop, and then prints out "Test done."
