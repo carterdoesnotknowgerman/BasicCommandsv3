@@ -2,6 +2,7 @@ package first.robot.mechanisms;
 
 import org.wpilib.command3.Command;
 import org.wpilib.command3.Mechanism;
+import org.wpilib.command3.Trigger;
 import org.wpilib.epilogue.Logged;
 import org.wpilib.util.Alert;
 
@@ -64,8 +65,17 @@ public class Doohickey implements Mechanism {
     public void updateSim() {
         motorSpark.updateSim();
 
+        // TODO: put these in a real periodic method
         motorPosition = motorEncoder.getPosition().get();
         motorVelocity = motorEncoder.getVelocity().get();
+    }
+
+    public boolean isReady() {
+        return Math.abs(motorEncoder.getPosition().get() - motorController.getSetpoint().get()) < 0.1;
+    }
+    
+    public Trigger isReadyTrigger() {
+        return new Trigger(this::isReady);
     }
 
     public Command stop() {

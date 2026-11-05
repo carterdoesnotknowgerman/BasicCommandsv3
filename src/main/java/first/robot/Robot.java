@@ -5,14 +5,16 @@ import org.wpilib.command3.button.CommandGamepad;
 import org.wpilib.epilogue.Epilogue;
 import org.wpilib.epilogue.Logged;
 import org.wpilib.framework.OpModeRobot;
+import org.wpilib.util.Color;
 
 import first.robot.mechanisms.Doohickey;
+import first.robot.mechanisms.LEDController;
 
 @Logged
 public class Robot extends OpModeRobot {
     // TODO: swerve drivebase (sim)????
-    // TODO: addressable leds and sim for those because pretty lights
     public final Doohickey doohickey = new Doohickey();
+    public final LEDController ledController = new LEDController();
     public final CommandGamepad controller = new CommandGamepad(0);
 
     private final Scheduler scheduler = Scheduler.getDefault();
@@ -20,6 +22,10 @@ public class Robot extends OpModeRobot {
     public Robot() {
         // because i've overriden `idle`, i have to set it as the default
         doohickey.setDefaultCommand(doohickey.idle());
+        ledController.setDefaultCommand(ledController.idle());
+        doohickey.isReadyTrigger()
+            .onTrue(ledController.fill(Color.LIME))
+            .onFalse(ledController.fill(Color.RED));
     }
 
     @Override
